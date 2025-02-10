@@ -1,11 +1,33 @@
+/* Ensure full-screen compatibility */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Styling for card container */
+#card-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for individual cards */
 .card {
     max-width: 18rem;
-    width: 170px;
-    height: 260px;
+    width: 70px;
+    height: 100px;
     margin: 10px;
     text-align: center;
-    display: inline-block; /* Ensure the card is positioned properly */
-    position: relative; /* Needed for absolute positioning */
+    display: inline-block;
+    position: relative;
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .card-body {
@@ -23,25 +45,25 @@
 
 .card-rank-top {
     position: absolute;
-    top: 0; /* Position it at the top */
+    top: 5px;
     left: 10px;
-    font-size: 35px;
+    font-size: 10px;
     color: red;
 }
 
 .card-rank-bottom {
     position: absolute;
-    bottom: 0; /* Position it at the bottom */
+    bottom: 5px;
     right: 10px;
-    font-size: 35px;
+    font-size: 10px;
     color: red;
 }
 
 .card-rank-bottom .card-suit, .card-rank-top .card-suit {
-    font-size: 20px; /* Make the suit smaller */
+    font-size: 5px;
 }
 
 .card-title {
-    font-size: 90px;
+    font-size: 20px;
     color: red;
 }
