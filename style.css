@@ -18,12 +18,9 @@ html, body {
 /* Styling for individual cards */
 .card {
     max-width: 18rem;
-    width: 70px;
-    height: 100px;
-    margin: 10px;
-    text-align: center;
-    display: inline-block;
-    position: relative;
+    width: 60px;
+    height: 90px;
+    margin: 0 -10px;
     background: white;
     border: 1px solid black;
     border-radius: 10px;
