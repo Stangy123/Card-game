@@ -69,11 +69,11 @@ class Card {
     suitTitle.classList.add('card-title');
 
     if (this.rank === 'J') {
-      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 60px; height: 100px;">'; // Boy icon for J
+      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 20px; height: 40px;">'; // Boy icon for J
     } else if (this.rank === 'Q') {
-      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 60px; height: 100px;">'; // Girl icon for Q
+      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 20px; height: 40px;">'; // Girl icon for Q
     } else if (this.rank === 'K') {
-      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 60px; height: 100px;">'; // Old Man icon for K
+      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 20px; height: 40px;">'; // Old Man icon for K
     } else {
       suitTitle.textContent = this.suit; // Suit for other ranks
       suitTitle.style.color = this.color; // Apply color based on the suit's color
