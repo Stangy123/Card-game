@@ -41,6 +41,7 @@ class Card {
     const bottomRankDiv = document.createElement('div');
     bottomRankDiv.classList.add('card-rank', 'card-rank-top');
     bottomRankDiv.textContent = this.rank;
+    bottomRankDiv.style.color = this.color; // Apply color based on the suit's color
 
     // Add the smaller suit to the top rank (this is the new top)
     const suitElementTop = document.createElement('span');
@@ -75,6 +76,7 @@ class Card {
     const topRankDiv = document.createElement('div');
     topRankDiv.classList.add('card-rank', 'card-rank-bottom');
     topRankDiv.textContent = this.rank;
+    topRankDiv.style.color = this.color; // Apply color based on the suit's color
 
     // Add the smaller suit to the bottom rank (this is the new bottom)
     const suitElementBottom = document.createElement('span');
@@ -104,7 +106,7 @@ for (let suit of suits) {
 function shuffleDeck() {
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap
+    [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap
   }
 }
 
