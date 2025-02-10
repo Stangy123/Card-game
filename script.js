@@ -130,3 +130,23 @@ function generateThirteenCards() {
 // Add event listener to the button
 const generateButton = document.getElementById('generate-cards');
 generateButton.addEventListener('click', generateThirteenCards);
+
+// Function to request full-screen mode
+function enterFullScreen() {
+  const element = document.documentElement; // Target the entire page
+
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) { // Firefox
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) { // IE/Edge
+    element.msRequestFullscreen();
+  }
+}
+
+// Automatically enter full-screen mode when the page loads
+window.addEventListener('load', () => {
+  enterFullScreen();
+});
