@@ -1,33 +1,43 @@
+// Function to enable full-screen mode automatically on mobile
+function goFullScreen() {
+    let doc = document.documentElement;
+
+    if (doc.requestFullscreen) {
+        doc.requestFullscreen();
+    } else if (doc.mozRequestFullScreen) { // Firefox
+        doc.mozRequestFullScreen();
+    } else if (doc.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        doc.webkitRequestFullscreen();
+    } else if (doc.msRequestFullscreen) { // IE/Edge
+        doc.msRequestFullscreen();
+    }
+}
+
+// Automatically trigger full-screen mode on mobile
+document.addEventListener("DOMContentLoaded", function () {
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+        goFullScreen();
+    }
+});
+
 // Card Class
 class Card {
-  constructor(rank, suit) {
-    this.rank = rank;
-    this.suit = suit;
-    this.rankValue = this.getRankValue(rank); // Rank value for sorting
-    this.color = this.getSuitColor(suit); // Color of the suit (red or black)
-  }
+    constructor(rank, suit) {
+        this.rank = rank;
+        this.suit = suit;
+        this.rankValue = this.getRankValue(rank);
+        this.color = this.getSuitColor(suit);
+    }
 
-  // Map rank to its numerical value for ranking purposes
-  getRankValue(rank) {
-    const rankValues = {
-      '2': 2,
-      '3': 3,
-      '4': 4,
-      '5': 5,
-      '6': 6,
-      '7': 7,
-      '8': 8,
-      '9': 9,
-      '10': 10,
-      'J': 11,
-      'Q': 12,
-      'K': 13,
-      'A': 14
-    };
-    return rankValues[rank] || 0; // Default to 0 if rank is invalid
-  }
+    getRankValue(rank) {
+        const rankValues = {
+            '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8,
+            '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14
+        };
+        return rankValues[rank] || 0;
+    }
 
-  // Assign suit color (red for hearts and diamonds, black for clubs and spades)
+    
   getSuitColor(suit) {
     return ['♥', '♦'].includes(suit) ? 'red' : 'black';
   }
@@ -130,23 +140,3 @@ function generateThirteenCards() {
 // Add event listener to the button
 const generateButton = document.getElementById('generate-cards');
 generateButton.addEventListener('click', generateThirteenCards);
-
-// Function to request full-screen mode
-function enterFullScreen() {
-  const element = document.documentElement; // Target the entire page
-
-  if (element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if (element.mozRequestFullScreen) { // Firefox
-    element.mozRequestFullScreen();
-  } else if (element.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-    element.webkitRequestFullscreen();
-  } else if (element.msRequestFullscreen) { // IE/Edge
-    element.msRequestFullscreen();
-  }
-}
-
-// Automatically enter full-screen mode when the page loads
-window.addEventListener('load', () => {
-  enterFullScreen();
-});
