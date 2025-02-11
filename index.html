@@ -10,9 +10,18 @@
 
     <div id="game-board">
         <div id="player1" class="player-position top"></div>
-        <div id="player2" class="player-position left"></div>
+        <div id="player2" class="player-position left">
+            <!-- Buttons for Pass and Discard -->
+            <div id="controls">
+                <button id="pass-button">Pass</button>
+                <button id="discard-button">Discard</button>
+            </div>
+        </div>
         <div id="player3" class="player-position right"></div>
         <div id="player4" class="player-position bottom"></div>
+        
+        <!-- Container for discarded cards -->
+        <div id="discard-pile" class="discard-pile"></div>
     </div>
 
     <script src="script.js"></script>
