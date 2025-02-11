@@ -64,6 +64,7 @@ html, body {
     font-weight: bold;
     color: black;
     transform: rotate(90deg); /* Rotate card vertically */
+    cursor: pointer; /* Add pointer cursor to indicate clickable cards */
 }
 
 /* Styling for Rank and Suit */
@@ -71,4 +72,43 @@ html, body {
     display: flex;
     flex-direction: column; /* Arrange rank and suit vertically */
     align-items: center;
+}
+.rank-top {
+  position: relative;
+  right: 20px;
+  bottom: 7px;
+}
+.rank-bottom {
+  position: relative;
+  left: 20px;
+  top: 7px;
+}
+
+/* Selected Card */
+.card.selected {
+    border: 2px solid yellow; /* Highlight selected cards */
+}
+
+/* Discard Pile */
+.discard-pile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 10px; /* Space between cards */
+}
+
+/* Controls */
+#controls {
+    position: absolute;
+    top: -50px; /* Place buttons above Player 2's cards */
+    display: flex;
+    gap: 10px;
+}
+
+#controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }
