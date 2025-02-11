@@ -1,142 +1,114 @@
-// Function to enable full-screen mode automatically on mobile
+// Function to enable full-screen mode automatically
 function goFullScreen() {
-    let doc = document.documentElement;
-
-    if (doc.requestFullscreen) {
-        doc.requestFullscreen();
-    } else if (doc.mozRequestFullScreen) { // Firefox
-        doc.mozRequestFullScreen();
-    } else if (doc.webkitRequestFullscreen) { // Chrome, Safari, Opera
-        doc.webkitRequestFullscreen();
-    } else if (doc.msRequestFullscreen) { // IE/Edge
-        doc.msRequestFullscreen();
-    }
+  let doc = document.documentElement;
+  if (doc.requestFullscreen) {
+    doc.requestFullscreen();
+  } else if (doc.mozRequestFullScreen) {
+    doc.mozRequestFullScreen();
+  } else if (doc.webkitRequestFullscreen) {
+    doc.webkitRequestFullscreen();
+  } else if (doc.msRequestFullscreen) {
+    doc.msRequestFullscreen();
+  }
 }
 
-// Automatically trigger full-screen mode on mobile
-document.addEventListener("DOMContentLoaded", function () {
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-        goFullScreen();
-    }
+// Automatically enable full-screen mode on page load
+document.addEventListener("DOMContentLoaded", function() {
+  goFullScreen();
+  distributeCards(); // Distribute cards when the page loads
 });
 
-// Card Class
+// Set the player who sees all 13 cards
+const currentPlayer = 2; // Change this to test different players (1-4)
+
+// Card class
 class Card {
-    constructor(rank, suit) {
-        this.rank = rank;
-        this.suit = suit;
-        this.rankValue = this.getRankValue(rank);
-        this.color = this.getSuitColor(suit);
-    }
-
-    getRankValue(rank) {
-        const rankValues = {
-            '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8,
-            '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14
-        };
-        return rankValues[rank] || 0;
-    }
-
-    
-  getSuitColor(suit) {
-    return ['♥', '♦'].includes(suit) ? 'red' : 'black';
+  constructor(rank, suit) {
+    this.rank = rank;
+    this.suit = suit;
   }
 
-  // Create the HTML structure for the card
-  createCardElement() {
+  createCardElement(isVisible) {
     const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card', 'text-bg-light', 'mb-3', 'rounded-1');
+    cardDiv.classList.add(isVisible ? 'card' : 'hidden-card');
 
-    // Bottom rank (this will appear at the top of the card)
-    const bottomRankDiv = document.createElement('div');
-    bottomRankDiv.classList.add('card-rank', 'card-rank-top');
-    bottomRankDiv.textContent = this.rank;
-    bottomRankDiv.style.color = this.color; // Apply color based on the suit's color
+    if (isVisible) {
+      // Create vertical content inside the card
+      const contentDiv = document.createElement('div');
+      contentDiv.classList.add('card-content');
 
-    // Add the smaller suit to the top rank (this is the new top)
-    const suitElementTop = document.createElement('span');
-    suitElementTop.classList.add('card-suit');
-    suitElementTop.textContent = this.suit;
-    suitElementTop.style.color = this.color; // Apply color based on the suit's color
-    bottomRankDiv.appendChild(suitElementTop);
-    cardDiv.appendChild(bottomRankDiv);
+      // Rank (Top)
+      const rankDiv = document.createElement('div');
+      rankDiv.textContent = this.rank;
+      rankDiv.style.fontSize = '16px';
+      contentDiv.appendChild(rankDiv);
 
-    // Card body with suit or icon in the middle
-    const cardBodyDiv = document.createElement('div');
-    cardBodyDiv.classList.add('card-body');
+      // Suit (Middle)
+      const suitDiv = document.createElement('div');
+      suitDiv.textContent = this.suit;
+      suitDiv.style.fontSize = '24px';
+      contentDiv.appendChild(suitDiv);
 
-    const suitTitle = document.createElement('h5');
-    suitTitle.classList.add('card-title');
+      // Rank (Bottom)
+      const bottomRankDiv = document.createElement('div');
+      bottomRankDiv.textContent = this.rank;
+      bottomRankDiv.style.fontSize = '16px';
+      contentDiv.appendChild(bottomRankDiv);
 
-    if (this.rank === 'J') {
-      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 20px; height: 40px;">'; // Boy icon for J
-    } else if (this.rank === 'Q') {
-      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 20px; height: 40px;">'; // Girl icon for Q
-    } else if (this.rank === 'K') {
-      suitTitle.innerHTML = '<img src="J.heic" alt="Boy" style="width: 20px; height: 40px;">'; // Old Man icon for K
-    } else {
-      suitTitle.textContent = this.suit; // Suit for other ranks
-      suitTitle.style.color = this.color; // Apply color based on the suit's color
+      // Add vertical content to card
+      cardDiv.appendChild(contentDiv);
     }
-
-    cardBodyDiv.appendChild(suitTitle);
-    cardDiv.appendChild(cardBodyDiv);
-
-    // Top rank (this will appear at the bottom of the card)
-    const topRankDiv = document.createElement('div');
-    topRankDiv.classList.add('card-rank', 'card-rank-bottom');
-    topRankDiv.textContent = this.rank;
-    topRankDiv.style.color = this.color; // Apply color based on the suit's color
-
-    // Add the smaller suit to the bottom rank (this is the new bottom)
-    const suitElementBottom = document.createElement('span');
-    suitElementBottom.classList.add('card-suit');
-    suitElementBottom.textContent = this.suit;
-    suitElementBottom.style.color = this.color; // Apply color based on the suit's color
-    topRankDiv.appendChild(suitElementBottom);
-    cardDiv.appendChild(topRankDiv);
 
     return cardDiv;
   }
 }
 
-// Create a deck of cards with 2 red suits and 2 black suits
+// Generate deck of 52 cards
 const suits = ['♥', '♦', '♣', '♠'];
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let deck = [];
 
-// Generate all cards
+// Create the deck
 for (let suit of suits) {
   for (let rank of ranks) {
     deck.push(new Card(rank, suit));
   }
 }
 
-// Function to shuffle the deck
+// Shuffle the deck
 function shuffleDeck() {
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap
+        [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap
   }
 }
 
-// Function to generate 13 random cards for the game
-function generateThirteenCards() {
-  // Shuffle the deck
+// Distribute cards to 4 players
+function distributeCards() {
   shuffleDeck();
 
-  // Get the first 13 cards
-  const selectedCards = deck.slice(0, 13);
+  const playerContainers = [
+        document.getElementById('player1'),
+        document.getElementById('player2'),
+        document.getElementById('player3'),
+        document.getElementById('player4'),
+    ];
 
-  // Render cards into the DOM
-  const cardContainer = document.getElementById('card-container');
-  cardContainer.innerHTML = ''; // Clear previous cards
+  // Clear previous cards
+  playerContainers.forEach(container => container.innerHTML = '');
 
-  selectedCards.forEach(card => {
-    cardContainer.appendChild(card.createCardElement());
-  });
+  // Assign 13 cards to each player
+  for (let i = 0; i < 4; i++) {
+    let playerHand = deck.slice(i * 13, (i + 1) * 13);
+
+    if (i + 1 === currentPlayer) {
+      // Player 2 gets all 13 cards (stacked vertically)
+      playerHand.forEach(card => {
+        playerContainers[i].appendChild(card.createCardElement(true));
+      });
+    } else {
+      // Players 1, 3, and 4 only get 1 visible card (stacked vertically)
+      playerContainers[i].appendChild(playerHand[0].createCardElement(true)); // Show 1st card
+    }
+  }
 }
-
-// Add event listener to the button
-const generateButton = document.getElementById('generate-cards');
-generateButton.addEventListener('click', generateThirteenCards);
