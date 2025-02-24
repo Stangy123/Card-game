@@ -3,25 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thirteen Card Game</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Game UI</title>
+    
+    <!-- Force Full-Screen Mode on Mobile -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div id="game-board">
-        <div id="player1" class="player-position top"></div>
-        <div id="player2" class="player-position left">
-            <!-- Buttons for Pass and Discard -->
-            <div id="controls">
-                <button id="pass-button">Pass</button>
-                <button id="discard-button">Discard</button>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="user-profile">
+                <img src="image/image.png" alt="User Avatar" class="avatar">
+                <div class="name-id">
+                    <span class="username">John Doe</span><br>
+                    <span class="id">ID: 123456789</span>
+                </div>
             </div>
-        </div>
-        <div id="player3" class="player-position right"></div>
-        <div id="player4" class="player-position bottom"></div>
-        
-        <!-- Container for discarded cards -->
-        <div id="discard-pile" class="discard-pile"></div>
+            <a href="#" class="game-title">Buy Coins</a>
+            <div class="header-actions">
+                <a href="#" class="chips">2,008,000,000</a>
+                <a href="#" class="gift-code">Giftcode</a>
+            </div>
+        </header>
+
+        <!-- Game Grid -->
+        <main class="game-grid">
+            <a href="#" class="game-card">
+                <img src="image/image copy.png" alt="Game">
+                <p>Game 1</p>
+            </a>
+            <a href="#" class="game-card">
+                <img src="image/image copy.png" alt="Game">
+                <p>Game 2</p>
+            </a>
+            <a href="#" class="game-card">
+                <img src="image/image copy.png" alt="Game">
+                <p>Game 3</p>
+            </a>
+            <a href="#" class="game-card">
+                <img src="image/image copy.png" alt="Game">
+                <p>Game 4</p>
+            </a>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <button class="footer-button">Piggy</button>
+            <button class="footer-button">Gift</button>
+            <button class="footer-button active">Withdraw</button>
+            <button class="footer-button">Mail</button>
+            <button class="footer-button">Settings</button>
+        </footer>
     </div>
 
     <script src="script.js"></script>
