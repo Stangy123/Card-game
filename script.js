@@ -15,46 +15,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // Enable full screen on click
     document.body.addEventListener("click", enterFullScreen);
 
-    // Drag to scroll functionality
-    const gameGrid = document.querySelector(".game-grid");
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+    // Only enable scrolling for touch devices
+    if ("ontouchstart" in document.documentElement) {
+        const gameGrid = document.querySelector(".game-grid");
+        let touchStartX = 0;
+        let touchScrollLeft = 0;
+        let touchVelocity = 0;
+        let rafId;
 
-    gameGrid.addEventListener("mousedown", (e) => {
-        isDown = true;
-        startX = e.pageX - gameGrid.offsetLeft;
-        scrollLeft = gameGrid.scrollLeft;
-    });
+        gameGrid.addEventListener("touchstart", (e) => {
+            touchStartX = e.touches[0].pageX;
+            touchScrollLeft = gameGrid.scrollLeft;
+            cancelAnimationFrame(rafId); // Stop momentum
+        });
 
-    gameGrid.addEventListener("mouseleave", () => {
-        isDown = false;
-    });
+        gameGrid.addEventListener("touchmove", (e) => {
+            const touchX = e.touches[0].pageX;
+            touchVelocity = (touchX - touchStartX) * 0.1; // Adjust speed
+            gameGrid.scrollLeft -= touchVelocity;
+        });
 
-    gameGrid.addEventListener("mouseup", () => {
-        isDown = false;
-    });
+        gameGrid.addEventListener("touchend", () => {
+            requestMomentumScroll();
+        });
 
-    gameGrid.addEventListener("mousemove", (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - gameGrid.offsetLeft;
-        const walk = (x - startX) * 2;
-        gameGrid.scrollLeft = scrollLeft - walk;
-    });
-
-    // Touch support
-    let touchStartX = 0;
-    let touchScrollLeft = 0;
-
-    gameGrid.addEventListener("touchstart", (e) => {
-        touchStartX = e.touches[0].pageX;
-        touchScrollLeft = gameGrid.scrollLeft;
-    });
-
-    gameGrid.addEventListener("touchmove", (e) => {
-        const touchX = e.touches[0].pageX;
-        const move = touchX - touchStartX;
-        gameGrid.scrollLeft = touchScrollLeft - move;
-    });
+        function requestMomentumScroll() {
+            if (Math.abs(touchVelocity) < 0.1) return; // Stop if velocity is very low
+            gameGrid.scrollLeft -= touchVelocity;
+            touchVelocity *= 0.95; // Apply friction to slow down
+            rafId = requestAnimationFrame(requestMomentumScroll);
+        }
+    }
 });
