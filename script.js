@@ -16,18 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Enable full screen on click
     document.body.addEventListener("click", enterFullScreen);
 
-    // Drag to scroll functionality with smooth scroll behavior
+    // Drag to scroll functionality with enhanced smooth scroll behavior
     const gameGrid = document.querySelector(".game-grid");
     let isDown = false;
     let startX;
     let scrollLeft;
 
+    // mousedown event: Track the initial position
     gameGrid.addEventListener("mousedown", (e) => {
         isDown = true;
         startX = e.pageX - gameGrid.offsetLeft;
         scrollLeft = gameGrid.scrollLeft;
     });
 
+    // mouseleave and mouseup: End the dragging
     gameGrid.addEventListener("mouseleave", () => {
         isDown = false;
     });
@@ -36,22 +38,20 @@ document.addEventListener("DOMContentLoaded", () => {
         isDown = false;
     });
 
+    // mousemove: Smooth dragging with `requestAnimationFrame`
     gameGrid.addEventListener("mousemove", (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - gameGrid.offsetLeft;
         const walk = (x - startX) * 2;
 
-        // Use requestAnimationFrame for smoother animation during drag
+        // Smooth dragging with requestAnimationFrame for smoother animations
         requestAnimationFrame(() => {
             gameGrid.scrollLeft = scrollLeft - walk;
         });
-
-        // Enable smooth scroll behavior
-        gameGrid.style.scrollBehavior = 'smooth';
     });
 
-    // Touch support for mobile
+    // Touch support for mobile devices with smooth scroll
     let touchStartX = 0;
     let touchScrollLeft = 0;
 
