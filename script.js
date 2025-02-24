@@ -26,13 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
         gameGrid.addEventListener("touchstart", (e) => {
             touchStartX = e.touches[0].pageX;
             touchScrollLeft = gameGrid.scrollLeft;
-            cancelAnimationFrame(rafId); // Stop momentum
+            touchVelocity = 0;
+            cancelAnimationFrame(rafId); // Stop previous momentum
         });
 
         gameGrid.addEventListener("touchmove", (e) => {
             const touchX = e.touches[0].pageX;
-            touchVelocity = (touchX - touchStartX) * 0.1; // Adjust speed
+            touchVelocity = (touchX - touchStartX) * 0.3; // Increase speed multiplier
             gameGrid.scrollLeft -= touchVelocity;
+            touchStartX = touchX;
         });
 
         gameGrid.addEventListener("touchend", () => {
@@ -40,9 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         function requestMomentumScroll() {
-            if (Math.abs(touchVelocity) < 0.1) return; // Stop if velocity is very low
+            if (Math.abs(touchVelocity) < 0.5) return; // Stop if velocity is very low
             gameGrid.scrollLeft -= touchVelocity;
-            touchVelocity *= 0.95; // Apply friction to slow down
+            touchVelocity *= 0.92; // Reduce friction for longer momentum
             rafId = requestAnimationFrame(requestMomentumScroll);
         }
     }
