@@ -110,7 +110,6 @@ a{
 /* Game Card */
 .game-card {
     flex-shrink: 0; /* Prevent shrinking */
-    width: 100px; /* Fixed width for the cards */
     min-width: 30px; /* Minimum width for the cards */
     user-select: none;
     text-align: center;
