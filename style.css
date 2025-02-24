@@ -43,13 +43,21 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
     background-color: #3c1509;
     border-bottom: 2px solid #8b4513;
     width: 100%;
     text-decoration: none;
 }
+a{
+    color: #fff;
+    text-decoration: none;
+}
+.header-actions {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
 
+}
 .user-profile {
     display: flex;
     align-items: center;
@@ -62,18 +70,21 @@ html, body {
 .avatar {
     border-radius: 50%;
     border: 2px solid #fff;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
 
 .game-title {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     color: #ffffff;
     background-color: #8b4513;
-    padding: 10px 28px;
-    border-radius: 10px;
+    padding: 5px 14px;
+    border-radius: 5px;
     text-decoration: none;
+    position: absolute;
+    left: 50%;
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 /* Game Grid */
@@ -91,7 +102,8 @@ html, body {
     scrollbar-width: none;
 }
 
-/* Hide scrollbar */
+
+
 .game-grid::-webkit-scrollbar {
     display: none;
 }
@@ -124,8 +136,17 @@ html, body {
 .footer {
     display: flex;
     justify-content: space-around;
-    padding: 20px;
+    padding: 10px;
+    align-items: center;
     background-color: #3c1509;
     border-top: 2px solid #8b4513;
     width: 100%;
+}
+.footer button {
+    background-color: #8b4513;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
