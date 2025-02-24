@@ -101,9 +101,17 @@ a {
     flex-wrap: nowrap; /* Prevent wrapping */
     max-width: 550px;
 }
-.game-grid::-webkit-scrollbar {
-    width: 0; /* Hide scrollbar */
+/* Hide scrollbar in all browsers */
+.game-grid {
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    scrollbar-width: none; /* For Firefox */
+    overflow: -moz-scrollbars-none; /* Hide scrollbars on Firefox */
 }
+
+.game-grid::-webkit-scrollbar {
+    width: 0; /* Hide scrollbar in Webkit-based browsers (Chrome, Safari, etc.) */
+}
+
 
 /* Game Card */
 .game-card {
