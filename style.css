@@ -96,7 +96,7 @@ a{
     scroll-snap-type: x mandatory; /* Ensures snap on scroll */
     overflow-x: auto;
     white-space: nowrap;
-    width: 400px;
+    width: 100%;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth; /* Smooth scrolling behavior */
     scrollbar-width: none;
@@ -106,9 +106,11 @@ a{
     display: none;
 }
 
+/* Game Card */
 .game-card {
     scroll-snap-align: start; /* Ensures each card aligns to the start of the container */
-    min-width: 90px;
+    flex-shrink: 0; /* Prevents shrinking */
+    width: 100px; /* Fixed width for the cards */
     user-select: none;
     text-align: center;
     background: #05a915;
@@ -121,6 +123,7 @@ a{
     align-items: center;
     text-decoration: none;
 }
+
 
 
 .game-card img {
