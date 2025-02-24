@@ -93,11 +93,11 @@ a{
     gap: 10px;
     padding: 10px;
     justify-content: center;
-    scroll-snap-type: x mandatory; /* Ensures snap on scroll */
+    scroll-snap-type: x mandatory; /* Smooth snap effect */
     overflow-x: auto;
     white-space: nowrap;
     width: 100%;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch; /* Native smooth scrolling on mobile */
     scroll-behavior: smooth; /* Smooth scrolling behavior */
     scrollbar-width: none;
 }
@@ -123,6 +123,7 @@ a{
     align-items: center;
     text-decoration: none;
 }
+
 
 
 
