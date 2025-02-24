@@ -86,6 +86,7 @@ a{
     left: 50%;
     white-space: nowrap; /* Prevent text from wrapping */
 }
+
 /* Game Grid */
 .game-grid {
     display: flex;
@@ -98,6 +99,8 @@ a{
     width: 100%;
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
     scrollbar-width: none; /* Hide scrollbar */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    max-width: calc(3 * 100px + 2 * 10px); /* Max width for 3 items (3 cards + 2 gaps) */
 }
 
 .game-grid::-webkit-scrollbar {
@@ -121,10 +124,6 @@ a{
     align-items: center;
     text-decoration: none;
 }
-
-
-
-
 
 
 .game-card img {
