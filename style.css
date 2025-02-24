@@ -48,7 +48,7 @@ html, body {
     width: 100%;
     text-decoration: none;
 }
-a{
+a {
     color: #fff;
     text-decoration: none;
 }
@@ -56,7 +56,6 @@ a{
     display: flex;
     gap: 10px;
     margin: 0 10px;
-
 }
 .user-profile {
     display: flex;
@@ -92,7 +91,7 @@ a{
     display: flex;
     gap: 10px;
     padding: 10px;
-    justify-content: center; /* Center the game cards */
+    justify-content: flex-start; /* Align the game cards to the start */
     align-items: center; /* Vertically center the items */
     overflow-x: auto; /* Horizontal scroll */
     white-space: nowrap;
@@ -100,9 +99,8 @@ a{
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
     scrollbar-width: none; /* Hide scrollbar */
     flex-wrap: nowrap; /* Prevent wrapping */
-    max-width: calc(3 * 100px + 2 * 10px); /* Max width for 3 items (3 cards + 2 gaps) */
+    max-width: 550px;
 }
-
 .game-grid::-webkit-scrollbar {
     width: 0; /* Hide scrollbar */
 }
@@ -124,7 +122,6 @@ a{
     align-items: center;
     text-decoration: none;
 }
-
 
 .game-card img {
     width: 100px;
@@ -151,4 +148,11 @@ a{
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Media query to handle max-width scenario */
+@media (max-width: 550px) {
+    .game-grid {
+        justify-content: flex-start; /* Align the game cards to the start */
+    }
 }
