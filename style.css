@@ -93,23 +93,21 @@ a{
     gap: 10px;
     padding: 10px;
     justify-content: center;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory; /* Ensures snap on scroll */
     overflow-x: auto;
     white-space: nowrap;
     width: 400px;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* Smooth scrolling behavior */
     scrollbar-width: none;
 }
-
-
 
 .game-grid::-webkit-scrollbar {
     display: none;
 }
 
 .game-card {
-    scroll-snap-align: start;
+    scroll-snap-align: start; /* Ensures each card aligns to the start of the container */
     min-width: 90px;
     user-select: none;
     text-align: center;
@@ -123,6 +121,7 @@ a{
     align-items: center;
     text-decoration: none;
 }
+
 
 .game-card img {
     width: 100px;
