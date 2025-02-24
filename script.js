@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Full-Screen Functionality
     function enterFullScreen() {
         let elem = document.documentElement;
         if (elem.requestFullscreen) {
@@ -40,13 +41,17 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const x = e.pageX - gameGrid.offsetLeft;
         const walk = (x - startX) * 2;
-        gameGrid.scrollLeft = scrollLeft - walk;
 
-        // Smooth scroll effect on drag release
+        // Use requestAnimationFrame for smoother animation during drag
+        requestAnimationFrame(() => {
+            gameGrid.scrollLeft = scrollLeft - walk;
+        });
+
+        // Enable smooth scroll behavior
         gameGrid.style.scrollBehavior = 'smooth';
     });
 
-    // Touch support
+    // Touch support for mobile
     let touchStartX = 0;
     let touchScrollLeft = 0;
 
